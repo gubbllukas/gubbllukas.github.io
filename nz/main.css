@@ -32,3 +32,7 @@ header nav img {
    border-radius: 50%;
 }
 
+header nav adress {
+   font-size: 0.9em;
+   font-style: italic;
+}
