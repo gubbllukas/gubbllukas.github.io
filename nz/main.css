@@ -21,6 +21,10 @@ header p {
    /*Text in Bild hoch setzen */
 }
 
+main {
+   margin: auto;
+}
+
 a:link,
 a:visited {
    color: black;
@@ -47,7 +51,7 @@ main p {
 }
 
 main figure {
-   margin-left: 0;
+   margin: auto;
    width: 100%;
 }
 
@@ -78,4 +82,13 @@ footer .back {
 }
 footer .next {
    float: right;
+}
+
+@media screen and  (max-width: 900px) {
+   main {
+      max-width: 90%;
+   }
+   header .banner {
+      width: 100vw;
+   }
 }
