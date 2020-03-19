@@ -17,8 +17,18 @@ header p {
    margin-top: -2em; /*Text in Bild hoch setzen */
 }
 
+a:link,
+a:visited {
+   color: black;
+}
+
 .white,
 .white a:link,
 .white a:visited {
    color: white;
 }
+
+header nav img {
+   border-radius: 50%;
+}
+
