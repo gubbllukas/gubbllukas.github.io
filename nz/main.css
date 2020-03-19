@@ -4,3 +4,7 @@ body {
    margin: auto; /*Zentrieren des gesamten Body */
    font-family: Arial;
 }
+
+header {
+   text-align: center;
+}
