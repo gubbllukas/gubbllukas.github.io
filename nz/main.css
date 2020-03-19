@@ -51,9 +51,14 @@ main figure img {
    border: 1px solid black;
 }
 
-/* # wählt eine id aus */
+/* . wählt ein Element mit einer Klasse aus */
+/* # wählt ein Element mit einer id aus */
 #map {
 width: 100%;
 height: 360px;
 border: 1px solid grey;
+}
+
+main ul {
+   list-style-type: circle;
 }
