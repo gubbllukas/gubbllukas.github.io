@@ -16,3 +16,7 @@ header p {
    padding-right: 1em; /*Einrücken */
    margin-top: -2em; /*Text in Bild hoch setzen */
 }
+
+.white, .white a:link, .white a:visited {
+   color: white;
+}
