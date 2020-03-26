@@ -93,11 +93,25 @@ participants.forEach(participant => {
 // Funktionen
 
 function showAge(birthYear) {
-    console.log(`Du bist ca. ${2020 - birthYear} Jahre alt`)
+    console.log(`Du bist ca. ${2020 - birthYear} Jahre alt`);
 }
 
 showAge(1990);
 showAge(1996);
-
 //Funktion gibt Möglichkeit gleichen Vorgang zu hinterlegen, um ihn nicht jedes mal wieder eingeben zu müssen
 
+function calcAge(birthYear) {
+    return 2020 - birthYear;
+}
+
+console.log(`Max ist ${calcAge(1990)} Jahre alt (ca.)`)
+console.log(`John ist ${calcAge(1996)} Jahre alt (ca.)`)
+// Flexiblere Handhabung von Funktionen
+
+let birthYears = [1964, 1977, 1990, 1996, 2001];
+console.log(birthYears);
+
+birthYears.forEach(year => {
+    console.log(`Geboren ${year}, heute ca. ${calcAge(year)} Jahre alt`);
+});
+//Funktion wird über mehrere Elemente eines Arrays ausgeführt
