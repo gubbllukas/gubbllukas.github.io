@@ -90,3 +90,14 @@ participants.forEach(participant => {
 });
 // foreach Schleife, deutlich praktischer als for
 
+// Funktionen
+
+function showAge(birthYear) {
+    console.log(`Du bist ca. ${2020 - birthYear} Jahre alt`)
+}
+
+showAge(1990);
+showAge(1996);
+
+//Funktion gibt Möglichkeit gleichen Vorgang zu hinterlegen, um ihn nicht jedes mal wieder eingeben zu müssen
+
