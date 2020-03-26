@@ -115,3 +115,16 @@ birthYears.forEach(year => {
     console.log(`Geboren ${year}, heute ca. ${calcAge(year)} Jahre alt`);
 });
 //Funktion wird über mehrere Elemente eines Arrays ausgeführt
+
+let users = [
+    { firstname: "John", lastname: "Smith", birthYear: 1960 },
+    { firstname: "Peter", lastname: "Mueller", birthYear: 1977 },
+    { firstname: "Lukas", lastname: "Endres", birthYear: 1990 },
+];
+
+console.log(users);
+
+users.forEach(user => {
+    console.log(`${user.firstname} ist oder wird heuer ${calcAge(user.birthYear)} Jahre alt.`);
+});
+
