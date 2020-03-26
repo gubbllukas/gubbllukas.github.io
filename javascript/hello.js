@@ -128,9 +128,11 @@ users.forEach(user => {
     console.log(`${user.firstname} ist oder wird heuer ${calcAge(user.birthYear)} Jahre alt.`);
 });
 
-// Zugriff auf ein html-Dokument: ducoment
+// Zugriff auf ein html-Dokument
 
 let firstParagraph = document.querySelector("#pFirst");
 console.log(firstParagraph);
 // firstParagraph.remove();
 firstParagraph.innerHTML = "Test";
+firstParagraph.style.color = "red";
+
