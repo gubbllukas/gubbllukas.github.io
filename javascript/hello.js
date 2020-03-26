@@ -76,3 +76,9 @@ console.log(a);
 for (let i=0; i<10; i++) {
     console.log(`Schleife ${i}`);
 }
+// for Gebinnt die Schleife, erster Wert erzeugt Variable, wie lange soll Schleife ausgeführt werden, was soll innerhalb der Schleife gemacht werden
+
+for (let j = 0; j < participants.length; j++) {
+    const participant = participants[j];
+    console.log(`Teilnehmer ${j+1} ${participant}`);
+}
