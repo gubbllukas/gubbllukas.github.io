@@ -9,5 +9,13 @@ L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
 
-var marker = L.marker([-43.880833, 169.040278]).addTo(mymap);
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+var markerRiverSafari = L.marker([-43.853582, 169.054602]).addTo(mymap);
+markerRiverSafari.bindPopup("<b>Haast River Safari!</b><br>Experience real New Zealand.").openPopup();
+
+var markerStadt = L.marker([-43.880833, 169.040278]).addTo(mymap);
+markerStadt.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+
+
+
+
