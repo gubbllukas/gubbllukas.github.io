@@ -47,7 +47,8 @@ header nav adress {
 
 main p {
    text-align: justify;
-   font-family: 'Liu Jian Mao Cao', cursive;
+   /* font-family: 'Liu Jian Mao Cao', cursive; */
+   font-family: 'Cavolini', cursive;
 }
 
 main figure {
