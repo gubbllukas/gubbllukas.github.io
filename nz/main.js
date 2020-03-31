@@ -8,3 +8,6 @@ L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     zoomOffset: -1,
     accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
+
+var marker = L.marker([-43.880833, 169.040278]).addTo(mymap);
+marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
