@@ -15,7 +15,15 @@ markerRiverSafari.bindPopup("<b>Haast River Safari!</b><br>Experience real New Z
 var markerStadt = L.marker([-43.880833, 169.040278]).addTo(mymap);
 markerStadt.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
-
+// Beim Klicken auf beliebigen Punkt auf der Karte werden entsprechende Koordinaten angezeigt:
+var popup = L.popup();
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(mymap);
+}
+mymap.on('click', onMapClick);
 
 
 
