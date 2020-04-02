@@ -7,6 +7,8 @@ let map = L.map("map", {
     ]
 });
 
+let circleGroup = L.featureGroup().addTo(map);
+
 L.control.layers({
     "OpenTopoMap": startLayer,
     "OpenStreetMap.Mapnik": L.tileLayer.provider("OpenStreetMap.Mapnik"),
@@ -14,9 +16,11 @@ L.control.layers({
     "Esri.OceanBasemap": L.tileLayer.provider("Esri.OceanBasemap"),
     "NASAGIBS.ViirsEarthAtNight2012": L.tileLayer.provider("NASAGIBS.ViirsEarthAtNight2012"),
     "Stamen.Watercolor": L.tileLayer.provider("Stamen.Watercolor")
+},{
+    "Thematische Darstellung" : circleGroup
 }).addTo(map);
 
-L.marker([0,0]).addTo(map);
+// L.marker([0,0]).addTo(map);
 
 console.log(CONFIRMED);
 
@@ -39,6 +43,6 @@ for (let i = 1; i < CONFIRMED.length; i++) {
     let r = Math.sqrt(val*s/Math.PI);
     let circle = L.circleMarker([lat,lng],{
         radius: r
-    }).addTo(map);
+    }).addTo(circleGroup);
     circle.bindPopup(`${reg}: ${val}`);
 }
