@@ -20,10 +20,10 @@ L.control.layers({
     "Thematische Darstellung" : circleGroup
 }).addTo(map);
 
+
+
 // L.marker([0,0]).addTo(map);
-
-console.log(CONFIRMED);
-
+// console.log(CONFIRMED);
 // for-Schleife über alle Arrays der CONFIRMED Einträge:
 
 for (let i = 1; i < CONFIRMED.length; i++) {
