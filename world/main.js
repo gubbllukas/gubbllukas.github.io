@@ -26,6 +26,9 @@ L.control.layers({
 
 let drawCircles = function () {
     let data= CONFIRMED;
+    let header = CONFIRMED[0];
+    let index =  header.length - 1; //entspricht Zugriff auf letzten Wert im Header
+
     for (let i = 1; i < data.length; i++) {
         let row = data[i];
         // console.log(row[2],row[3]);
