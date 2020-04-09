@@ -49,7 +49,7 @@ let drawCircles = function () {
 
     circleGroup.clearLayers();
 
-    data.sort(function compareNumbers(row1,row2) {
+    data.sort(function compareNumbers(row1, row2) {
         return row2[index] - row1[index];
     });
 
@@ -61,7 +61,7 @@ let drawCircles = function () {
         let lng = row[3];
         let val = row[row.length - 1];
 
-        if (val === "0"){
+        if (val === "0") {
             continue;
         }
 
@@ -97,3 +97,33 @@ slider.onchange = function () {
 drawCircles();
 // drawCircles(RECOVERED);
 // drawCircles(DEATH);
+
+let playButton = document.querySelector("#play");
+let runningAnimation = null;
+
+playButton.onclick = function () {
+    let value = slider.min;
+    if (slider.value == slider.max) {
+        value = slider.min;
+    } else {
+        value = slider.value;
+    }
+
+    playButton.value = "⏸";
+
+    if (runningAnimation) {
+        window.clearInterval(runningAnimation);
+        playButton.value = "▶";
+    } else {
+        runningAnimation = window.setInterval(function () {
+            //console.log(value, "nach 250 ms");
+            value++;
+            slider.value = value;
+            drawCircles();
+
+            if (value > slider.max) {
+                window.clearInterval(runningAnimation);
+            }
+        }, 250)
+    }
+}
