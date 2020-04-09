@@ -36,14 +36,15 @@ let drawCircles = function () {
 
     if (value === "confirmed") {
         data = CONFIRMED;
-        color = "blue";
+        color = "#0074D9";
     } else if (value === "deaths") {
         data = DEATHS;
-        color = "purple";
+        color = "#B10DC9";
     } else {
         data = RECOVERED;
-        color = "green";
+        color = "#2ECC40";
     }
+
     //Datum & Thema anzeigen:
     document.querySelector("#datum").innerHTML = `am ${header[index]} - ${label}`;
 
@@ -81,8 +82,8 @@ let drawCircles = function () {
     }
 };
 
-document.querySelector("#pulldown").onchange = function () {
-    drawCircles()
+document.querySelector("#pulldown").onchange = function() {
+    drawCircles();
 };
 
 let slider = document.querySelector("#slider");
@@ -90,19 +91,18 @@ slider.min = 4;
 slider.max = CONFIRMED[0].length - 1;
 slider.step = 1;
 slider.value = slider.max;
+
 slider.onchange = function () {
     drawCircles();
 };
 
 drawCircles();
-// drawCircles(RECOVERED);
-// drawCircles(DEATH);
 
 let playButton = document.querySelector("#play");
 let runningAnimation = null;
 
 playButton.onclick = function () {
-    let value = slider.min;
+    let value;
     if (slider.value == slider.max) {
         value = slider.min;
     } else {
@@ -114,16 +114,18 @@ playButton.onclick = function () {
     if (runningAnimation) {
         window.clearInterval(runningAnimation);
         playButton.value = "▶";
+        runningAnimation = null;
     } else {
         runningAnimation = window.setInterval(function () {
-            //console.log(value, "nach 250 ms");
-            value++;
             slider.value = value;
             drawCircles();
+            value++;
 
             if (value > slider.max) {
                 window.clearInterval(runningAnimation);
+                playButton.value = "▶";
+                runningAnimation = null;
             }
         }, 250)
     }
-}
+};
