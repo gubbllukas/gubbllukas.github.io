@@ -24,7 +24,8 @@ L.control.layers({
 // console.log(CONFIRMED);
 // for-Schleife über alle Arrays der CONFIRMED Einträge:
 
-let drawCircles = function (data) {
+let drawCircles = function () {
+    let data= CONFIRMED;
     for (let i = 1; i < data.length; i++) {
         let row = data[i];
         // console.log(row[2],row[3]);
@@ -47,6 +48,6 @@ let drawCircles = function (data) {
     }
 };
 
-drawCircles(CONFIRMED);
-drawCircles(RECOVERED);
-drawCircles(DEATH);
+drawCircles();
+// drawCircles(RECOVERED);
+// drawCircles(DEATH);
