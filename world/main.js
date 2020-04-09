@@ -59,6 +59,10 @@ let drawCircles = function () {
         // let mrk = L.marker([lat,lng]).addTo(map);
         // mrk.bindPopup(`${reg}: ${val}`);
 
+        if (value === "0") {
+            continue;
+        }
+        
         // A = r²*PI
         // r² = A/PI
         // r = WURZEL(A/PI)
