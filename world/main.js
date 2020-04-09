@@ -81,7 +81,9 @@ slider.min = 4;
 slider.max = CONFIRMED[0].length - 1;
 slider.step = 1;
 slider.value = slider.max;
-
+slider.onchange = function () {
+    drawCircles();
+};
 
 drawCircles();
 // drawCircles(RECOVERED);
