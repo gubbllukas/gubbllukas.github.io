@@ -33,8 +33,17 @@ let drawCircles = function () {
     let label = options[options.selectedIndex].text;
     // console.log(value,label,options);
 
+    if (value === "confirmed") {
+        data = CONFIRMED
+    } else if (value === "deaths") {
+        data = DEATHS;
+    } else {
+        data = RECOVERED;
+    }
     //Datum & Thema anzeigen:
     document.querySelector("#datum").innerHTML = `am ${header[index]} - ${label}`;
+
+    circleGroup.clearLayers();
 
     for (let i = 1; i < data.length; i++) {
         let row = data[i];
