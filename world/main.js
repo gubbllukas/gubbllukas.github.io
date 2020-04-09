@@ -49,6 +49,10 @@ let drawCircles = function () {
 
     circleGroup.clearLayers();
 
+    data.sort(function compareNumbers(row1,row2) {
+        return row2[index] - row1[index];
+    });
+
     for (let i = 1; i < data.length; i++) {
         let row = data[i];
         // console.log(row[2],row[3]);
