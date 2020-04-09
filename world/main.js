@@ -25,20 +25,24 @@ L.control.layers({
 // for-Schleife über alle Arrays der CONFIRMED Einträge:
 
 let drawCircles = function () {
-    let data= CONFIRMED;
+    let data = CONFIRMED;
     let header = CONFIRMED[0];
-    let index =  header.length - 1; //entspricht Zugriff auf letzten Wert im Header
+    let index = header.length - 1; //entspricht Zugriff auf letzten Wert im Header
     let options = document.querySelector("#pulldown").options;
     let value = options[options.selectedIndex].value;
     let label = options[options.selectedIndex].text;
+    let color;
     // console.log(value,label,options);
 
     if (value === "confirmed") {
-        data = CONFIRMED
+        data = CONFIRMED;
+        color = "blue";
     } else if (value === "deaths") {
         data = DEATHS;
+        color = "purple";
     } else {
         data = RECOVERED;
+        color = "green";
     }
     //Datum & Thema anzeigen:
     document.querySelector("#datum").innerHTML = `am ${header[index]} - ${label}`;
@@ -61,13 +65,14 @@ let drawCircles = function () {
         let s = 0.2
         let r = Math.sqrt(val * s / Math.PI);
         let circle = L.circleMarker([lat, lng], {
-            radius: r
+            radius: r,
+            color: color
         }).addTo(circleGroup);
         circle.bindPopup(`${reg}: ${val}`);
     }
 };
 
-document.querySelector("#pulldown").onchange = function() {
+document.querySelector("#pulldown").onchange = function () {
     drawCircles()
 };
 
