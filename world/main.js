@@ -60,7 +60,7 @@ let drawCircles = function () {
         let reg = `${row[0]} ${row[1]}`;
         let lat = row[2];
         let lng = row[3];
-        let val = row[row.length - 1];
+        let val = row[index];
 
         if (val === "0") {
             continue;
