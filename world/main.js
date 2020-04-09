@@ -27,7 +27,7 @@ L.control.layers({
 let drawCircles = function () {
     let data = CONFIRMED;
     let header = CONFIRMED[0];
-    let index = querySelector("#slider");
+    let index = document.querySelector("#slider").value;
     let options = document.querySelector("#pulldown").options;
     let value = options[options.selectedIndex].value;
     let label = options[options.selectedIndex].text;
