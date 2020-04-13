@@ -36,8 +36,20 @@ markerBiwakGaisalpsee.bindPopup("<b>Biwak Gaisalpsee</b><br>Biwak,Wasser,Baden,S
 let markerRubihorn = L.marker([47.424632, 10.314776]).addTo(mymap);
 markerRubihorn.bindPopup("<b>Rubihorn</b><br>Sonnenaufgangstour vom Gaisalpsee").openPopup();
 
+let markerRissbachKarwendel = L.marker([47.461670, 11.505990]).addTo(mymap);
+markerRissbachKarwendel.bindPopup("<b>KarwendelBiwak</b><br>Biwak,Baden,Wasser,Sonnenuntergang").openPopup();
 
+let markerKlammklettern = L.marker([47.557565, 11.541332]).addTo(mymap);
+markerKlammklettern.bindPopup("<b>Krottenbachklamm</b><br>Klammkletterei").openPopup();
 
+let markerBiwakSylvenstein = L.marker([47.568938, 11.494105]).addTo(mymap);
+markerBiwakSylvenstein.bindPopup("<b>BiwakSylvenstein</b><br>Biwak,Baden,Wasser,Lagerfeuer").openPopup();
+
+let markerPrinzenbad = L.marker([47.454298, 10.568719]).addTo(mymap);
+markerPrinzenbad.bindPopup("<b>Prinzenbad</b><br>Baden,Wasserfall").openPopup();
+
+let markerBiwakBirkental = L.marker([47.533765, 10.797322]).addTo(mymap);
+markerBiwakBirkental.bindPopup("<b>BiwakBirkental</b><br>Biwak,Baden,Wasser,Lagerfeuer").openPopup();
 
 
 function onMapClick(e) {
