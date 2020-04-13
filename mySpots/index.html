@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Spots</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.9.1/leaflet-providers.js"></script>
+
+    <link rel="stylesheet" href="main.css">
+    <script src="data.js"></script>
+    <script defer src="main.js"></script>
+</head>
+
+<body>
+    <header>
+        <h2><i class="fas fa-map-marked"></i> Meine Spots <span id="datum"></span></h2>
+        <nav>
+            <p>
+                <i class="fab fa-github"></i> <a href="https://github.com/webmapping/webmapping.github.io/tree/master/world">Source</a> |
+                <i class="fas fa-download"></i> <a href="https://github.com/CSSEGISandData/COVID-19">COVID-Data</a>
+            </p>
+        </nav>
+    </header>
+
+    <main>
+        <div id="map" data-lat="47.267222" data-lng="11.392778" data-title="MySpots"></div>
+        
+    </main>
+</body>
+
+</html>
