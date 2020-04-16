@@ -53,3 +53,11 @@ let walk = L.geoJson.ajax(walkUrl, {
         return marker;
     }
 }).addTo(walkGroup);
+
+//Event nötig, um Kartenanpasseung vorzunehmen, da die Daten vom Server angefordert werden,
+//aber beim Kartenanpassen noch nicht zwingend verfügbar sein müssen.
+//Dann darin die fitBounds-Aufforderung einbetten und mit getBounds die Grenzen der walkGroup anfordern.
+walk.on("data.loaded", function() {
+    map.fitBounds(walkGroup.getBounds());
+});
+
