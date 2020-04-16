@@ -22,8 +22,11 @@ L.control.layers({
     ])
 }).addTo(map);
 
-// Marker in Karte mit Hilfe von Leaflet einbetten:
-let walk = L.geoJson(SPAZIERGANG, {
+//Direkte Einbettung der Daten und Abrufen vom Server:
+//Vorteil, dass immer aktuelle Daten vom Server verwendet werden:
+let walkUrl = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD&srsName=EPSG:4326&outputFormat=json"
+
+let walk = L.geoJson.ajax(walkUrl, {
     pointToLayer: function(point, latlng) {
         //von Website Wien vorgesehenes Icon verwenden
         let icon = L.icon({
