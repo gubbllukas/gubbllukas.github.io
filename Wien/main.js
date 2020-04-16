@@ -27,6 +27,7 @@ let walk = L.geoJson(SPAZIERGANG, {
     pointToLayer: function(point, latlng) {
         //Marker verändern
         let marker = L.marker(latlng);
+        //mit console.log im Browser Struktur für das Popup herausfinden
         console.log("Point", point)
         // Popup einfügen mit hinterlegtem Namen des Markers und den interlegten Link mit "Link" anzeigen:
         //target="" ermöglicht, dass der link in einem neuen Fenster geöffnet wird
