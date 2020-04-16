@@ -8,6 +8,8 @@ let map = L.map("map", {
     ]
 });
 
+let walkGroup = L.featureGroup().addTo(map);
+
 L.control.layers({
     "BasemapAT.grau": startLayer,
     "BasemapAT": L.tileLayer.provider("BasemapAT"),
@@ -20,6 +22,8 @@ L.control.layers({
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay")
     ])
+},{
+    "Stadtspaziergang (Punkte)": walkGroup
 }).addTo(map);
 
 //Direkte Einbettung der Daten und Abrufen vom Server:
@@ -48,4 +52,4 @@ let walk = L.geoJson.ajax(walkUrl, {
         `);
         return marker;
     }
-}).addTo(map);
+}).addTo(walkGroup);
