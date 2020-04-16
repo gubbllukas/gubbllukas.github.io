@@ -27,7 +27,7 @@ let walk = L.geoJson(SPAZIERGANG, {
     pointToLayer: function(point, latlng) {
         //von Website Wien vorgesehenes Icon verwenden
         let icon = L.icon({
-            iconURL: 'icons/sight.svg',
+            iconUrl: 'icons/sight.svg',
             iconSize: [32, 32]
         });
         //Marker verändern
@@ -37,8 +37,10 @@ let walk = L.geoJson(SPAZIERGANG, {
         //mit console.log im Browser Struktur für das Popup herausfinden
         console.log("Point", point)
         // Popup einfügen mit hinterlegtem Namen des Markers und den interlegten Link mit "Link" anzeigen:
+        // und Bemerkungstext anzeigen lassen
         //target="" ermöglicht, dass der link in einem neuen Fenster geöffnet wird
         marker.bindPopup(`<h3>${point.properties.NAME}</h3>
+        <p>${point.properties.BEMERKUNG}</p>
         <p><a target="links" href="${point.properties.WEITERE_INF}">link</a></p>
         `);
         return marker;
