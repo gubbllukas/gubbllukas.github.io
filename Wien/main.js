@@ -25,8 +25,15 @@ L.control.layers({
 // Marker in Karte mit Hilfe von Leaflet einbetten:
 let walk = L.geoJson(SPAZIERGANG, {
     pointToLayer: function(point, latlng) {
+        //von Website Wien vorgesehenes Icon verwenden
+        let icon = L.icon({
+            iconURL: 'icons/sight.svg',
+            iconSize: [32, 32]
+        });
         //Marker verändern
-        let marker = L.marker(latlng);
+        let marker = L.marker(latlng, {
+            icon: icon
+        });
         //mit console.log im Browser Struktur für das Popup herausfinden
         console.log("Point", point)
         // Popup einfügen mit hinterlegtem Namen des Markers und den interlegten Link mit "Link" anzeigen:
