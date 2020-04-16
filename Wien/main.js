@@ -21,3 +21,18 @@ L.control.layers({
         L.tileLayer.provider("BasemapAT.overlay")
     ])
 }).addTo(map);
+
+// Marker in Karte mit Hilfe von Leaflet einbetten:
+let walk = L.geoJson(SPAZIERGANG, {
+    pointToLayer: function(point, latlng) {
+        //Marker verändern
+        let marker = L.marker(latlng);
+        console.log("Point", point)
+        // Popup einfügen mit hinterlegtem Namen des Markers und den interlegten Link mit "Link" anzeigen:
+        //target="" ermöglicht, dass der link in einem neuen Fenster geöffnet wird
+        marker.bindPopup(`<h3>${point.properties.NAME}</h3>
+        <p><a target="links" href="${point.properties.WEITERE_INF}">link</a></p>
+        `);
+        return marker;
+    }
+}).addTo(map);
