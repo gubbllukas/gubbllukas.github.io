@@ -8,7 +8,10 @@ let map = L.map("map", {
     ]
 });
 
+let sightGroup = L.markerClusterGroup().addTo(map);
+
 let walkGroup = L.featureGroup().addTo(map);
+let heritageGroup = L.featureGroup().addTo(map);
 
 L.control.layers({
     "BasemapAT.grau": startLayer,
@@ -23,14 +26,16 @@ L.control.layers({
         L.tileLayer.provider("BasemapAT.overlay")
     ])
 },{
-    "Stadtspaziergang (Punkte)": walkGroup
+    "Stadtspaziergang (Punkte)": sightGroup,
+    "Wanderungen": walkGroup,
+    "Weltkulturerbe": heritageGroup
 }).addTo(map);
 
 //Direkte Einbettung der Daten und Abrufen vom Server:
 //Vorteil, dass immer aktuelle Daten vom Server verwendet werden:
-let walkUrl = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD&srsName=EPSG:4326&outputFormat=json"
+let sightUrl = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD&srsName=EPSG:4326&outputFormat=json"
 
-let walk = L.geoJson.ajax(walkUrl, {
+let sights = L.geoJson.ajax(sightUrl, {
     pointToLayer: function(point, latlng) {
         //von Website Wien vorgesehenes Icon verwenden
         let icon = L.icon({
@@ -52,13 +57,12 @@ let walk = L.geoJson.ajax(walkUrl, {
         `);
         return marker;
     }
-}).addTo(walkGroup);
+});
 
-//Event nötig, um Kartenanpasseung vorzunehmen, da die Daten vom Server angefordert werden,
-//aber beim Kartenanpassen noch nicht zwingend verfügbar sein müssen.
-//Dann darin die fitBounds-Aufforderung einbetten und mit getBounds die Grenzen der walkGroup anfordern.
-walk.on("data.loaded", function() {
-    map.fitBounds(walkGroup.getBounds());
+sights.on("data:loaded", function() {
+    sightGroup.addLayer(sights);
+    console.log('data loaded!');
+    map.fitBounds(sightGroup.getBounds());
 });
 
 
@@ -67,7 +71,7 @@ L.geoJson.ajax(wandern, {
     style: function() {
         return {color: "green", weight: 5};
     }
-}).addTo(map);
+}).addTo(walkGroup);
 
 let heritage = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WELTKULTERBEOGD&srsName=EPSG:4326&outputFormat=json";
 L.geoJson.ajax(heritage, {
@@ -80,4 +84,4 @@ L.geoJson.ajax(heritage, {
         <p>${feature.properties.INFO}</p>
         `);
     }
-}).addTo(map);
+}).addTo(heritageGroup);
