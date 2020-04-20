@@ -43,19 +43,19 @@ let sights = L.geoJson.ajax(sightUrl, {
             iconSize: [32, 32]
         });
         //Marker verändern
-        let marker = L.marker(latlng, {
+        let markerSights = L.marker(latlng, {
             icon: icon
         });
-        //mit console.log im Browser Struktur für das Popup herausfinden
-        // console.log("Point", point)
+
         // Popup einfügen mit hinterlegtem Namen des Markers und den interlegten Link mit "Link" anzeigen:
         // und Bemerkungstext anzeigen lassen
         //target="" ermöglicht, dass der link in einem neuen Fenster geöffnet wird
-        marker.bindPopup(`<h3>${point.properties.NAME}</h3>
+        markerSights.bindPopup(`<h3>${point.properties.NAME}</h3>
+        <p>${point.properties.ADRESSE}</p>
         <p>${point.properties.BEMERKUNG}</p>
-        <p><a target="links" href="${point.properties.WEITERE_INF}">link</a></p>
+        <p><a target="links" href="${point.properties.WEITERE_INF}">weiterführende Informationen</a></p>
         `);
-        return marker;
+        return markerSights;
     }
 });
 
@@ -70,6 +70,12 @@ let wandern = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&
 L.geoJson.ajax(wandern, {
     style: function() {
         return {color: "green", weight: 5};
+    },
+    onEachFeature: function(feature, layer) {
+        console.log(feature);
+        layer.bindPopup(`<h3>${feature.properties.NAME}</h3>
+        <p>${feature.properties.INFO}</p>
+        `);
     }
 }).addTo(walkGroup);
 
@@ -77,11 +83,8 @@ let heritage = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature
 L.geoJson.ajax(heritage, {
     style: function() {
         return {color: "salmon", fillOpacity: 0.3};
-    },
-    onEachFeature: function(feature, layer) {
-        console.log(feature);
-        layer.bindPopup(`<h3>${feature.properties.NAME}</h3>
-        <p>${feature.properties.INFO}</p>
-        `);
+    // },
+    // onEachFeature: function(feature, layer) {
+    //     layer.bindPopup(`<h3>${feature.properties.BEZ_TEXT}</h3>`);
     }
 }).addTo(heritageGroup);
