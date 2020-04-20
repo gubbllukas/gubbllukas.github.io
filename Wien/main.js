@@ -61,30 +61,54 @@ let sights = L.geoJson.ajax(sightUrl, {
 
 sights.on("data:loaded", function() {
     sightGroup.addLayer(sights);
-    console.log('data loaded!');
     map.fitBounds(sightGroup.getBounds());
 });
 
 
+
+// Funktion für Farbcodierung Wanderwege:
+// Typ 1 = Stadtwanderweg --> schwarz strichliert / Typ 2 = Rundum --> schwarz punktiert
+// Farbcodierung noch nicht soweit, dass gepunktet und gestrichelt möglich ist
+function walkColor(d) {
+    return d >= 2 ? "black":
+    d <= 1 ? "green":
+    "white";
+};
+
 let wandern = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WANDERWEGEOGD&srsName=EPSG:4326&outputFormat=json";
 L.geoJson.ajax(wandern, {
-    style: function() {
-        return {color: "green", weight: 5};
+    style: function(feature) {
+        return {
+            color: walkColor(feature.properties.TYP),
+            weight: 4
+        };
     },
     onEachFeature: function(feature, layer) {
-        console.log(feature);
-        layer.bindPopup(`<h3>${feature.properties.NAME}</h3>
-        <p>${feature.properties.INFO}</p>
-        `);
+        layer.bindPopup(`<h3>${feature.properties.BEZ_TEXT}</h3>
+                `);
     }
 }).addTo(walkGroup);
 
+// Funktion für Farbcodierung Heritage: Typ 2 = Pufferzone / Typ 1 = Kernzone
+function heritageColor(d) {
+    return d >= 2 ? "yellow":
+    d <= 1 ? "red":
+    "white";
+};
+
 let heritage = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WELTKULTERBEOGD&srsName=EPSG:4326&outputFormat=json";
 L.geoJson.ajax(heritage, {
-    style: function() {
-        return {color: "salmon", fillOpacity: 0.3};
-    // },
-    // onEachFeature: function(feature, layer) {
-    //     layer.bindPopup(`<h3>${feature.properties.BEZ_TEXT}</h3>`);
+    //wichtig hier. feature bei function einfügen, damit abgerufen werden kann
+    style: function(feature) {
+        return {
+            color: heritageColor(feature.properties.TYP),
+            fillOpacity: 0.6
+        };
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(`<h3>${feature.properties.NAME}</h3>`)
     }
 }).addTo(heritageGroup);
+
+
+
