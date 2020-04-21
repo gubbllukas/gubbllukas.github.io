@@ -25,7 +25,7 @@ L.control.layers({
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay")
     ])
-},{
+}, {
     "Stadtspaziergang (Punkte)": sightGroup,
     "Wanderungen": walkGroup,
     "Weltkulturerbe": heritageGroup
@@ -36,7 +36,7 @@ L.control.layers({
 let sightUrl = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD&srsName=EPSG:4326&outputFormat=json"
 
 let sights = L.geoJson.ajax(sightUrl, {
-    pointToLayer: function(point, latlng) {
+    pointToLayer: function (point, latlng) {
         //von Website Wien vorgesehenes Icon verwenden
         let icon = L.icon({
             iconUrl: 'icons/sight.svg',
@@ -59,31 +59,31 @@ let sights = L.geoJson.ajax(sightUrl, {
     }
 });
 
-sights.on("data:loaded", function() {
+sights.on("data:loaded", function () {
     sightGroup.addLayer(sights);
     map.fitBounds(sightGroup.getBounds());
 });
 
 
-
-// Funktion für Farbcodierung Wanderwege:
-// Typ 1 = Stadtwanderweg --> schwarz strichliert / Typ 2 = Rundum --> schwarz punktiert
-// Farbcodierung noch nicht soweit, dass gepunktet und gestrichelt möglich ist
-function walkColor(d) {
-    return d >= 2 ? "black":
-    d <= 1 ? "green":
-    "white";
-};
-
 let wandern = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WANDERWEGEOGD&srsName=EPSG:4326&outputFormat=json";
+
 L.geoJson.ajax(wandern, {
-    style: function(feature) {
-        return {
-            color: walkColor(feature.properties.TYP),
-            weight: 4
-        };
+    style: function (feature) {
+        if (feature.properties.TYP == "2") {
+            return {
+                dashArray: [1, 5],
+                color: "black",
+                weight: 3
+            }
+        } else if (feature.properties.TYP == "1") {
+            return {
+                dashArray: [10, 5],
+                color: "black",
+                weight: 3
+            }
+        }
     },
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         layer.bindPopup(`<h3>${feature.properties.BEZ_TEXT}</h3>
                 `);
     }
@@ -91,24 +91,21 @@ L.geoJson.ajax(wandern, {
 
 // Funktion für Farbcodierung Heritage: Typ 2 = Pufferzone / Typ 1 = Kernzone
 function heritageColor(d) {
-    return d >= 2 ? "yellow":
-    d <= 1 ? "red":
-    "white";
+    return d >= 2 ? "yellow" :
+        d <= 1 ? "red" :
+        "white";
 };
 
 let heritage = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WELTKULTERBEOGD&srsName=EPSG:4326&outputFormat=json";
 L.geoJson.ajax(heritage, {
     //wichtig hier. feature bei function einfügen, damit abgerufen werden kann
-    style: function(feature) {
+    style: function (feature) {
         return {
             color: heritageColor(feature.properties.TYP),
             fillOpacity: 0.6
         };
     },
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         layer.bindPopup(`<h3>${feature.properties.NAME}</h3>`)
     }
 }).addTo(heritageGroup);
-
-
-
