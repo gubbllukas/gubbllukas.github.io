@@ -1,5 +1,3 @@
-//Skript Gerüst: https://github.com/webmapping/webmapping.github.io/blob/master/aws-tirol/main.js
-
 let startLayer = L.tileLayer.provider("BasemapAT.grau");
 
 let map = L.map("map", {
