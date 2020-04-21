@@ -1,3 +1,5 @@
+//Skript Gerüst: https://github.com/webmapping/webmapping.github.io/blob/master/aws-tirol/main.js
+
 let startLayer = L.tileLayer.provider("BasemapAT.grau");
 
 let map = L.map("map", {
@@ -30,13 +32,10 @@ let awsUrl = "https://aws.openweb.cc/stations";
 
 let aws = L.geoJson.ajax(awsUrl, {
     filter: function (feature) {
-        //console.log("Feature in filter: ", feature) ---> so abändern, dass nur wenn LT vorhanden, dann anzeigen;
         return feature.geometry.LT = true;
     },
     pointToLayer: function (point, latlng) {
         // console.log("point: ", point);
-        // Liste Schneehöhe fehlt noch, da Wert in properties nicht gefunden?!
-        // <li>Schneehöhe: ${point.properties.???} [Einheit?]]</li>
         let marker = L.marker(latlng).bindPopup(`
         <h3>${point.properties.name}, ${point.geometry.coordinates[2]} m</h3>
         <ul>
@@ -45,6 +44,7 @@ let aws = L.geoJson.ajax(awsUrl, {
         <li>Lufttemperatur: ${point.properties.LT} °C</li>
         <li>Windgeschwindigkeit: ${point.properties.WG} m/s</li>
         <li>Relative Feuchte: ${point.properties.RH} %</li>
+        <li>Schneehöhe: ${point.properties.HS} cm]</li>
         <li><a target="links" href="https://lawine.tirol.gv.at/data/grafiken/1100/standard/tag/${point.properties.plot}.png">ZAMG Wetterdaten Grafik</a></li>
         </ul>
         `);
