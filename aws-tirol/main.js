@@ -70,6 +70,7 @@ let getColor = function(val,ramp) {
     }
     return col;
 };
+
 //Beispielhaft in der Console.log beliebige Werte für .temperature oder .wind ausprobieren:
 // let color = getColor(34,COLORS.temperature);
 //console.log(color);
@@ -82,7 +83,6 @@ let drawTemperature = function(jsonData) {
         },
         pointToLayer: function (feature, latlng) {
             let color = getColor(feature.properties.LT,COLORS.temperature);
-            console.log(COLOR)
             return L.marker(latlng, {
                 title: `${feature.properties.name} (${feature.geometry.coordinates[2]}m)`,
                 icon: L.divIcon({
