@@ -106,6 +106,8 @@ L.geoJson.ajax(heritage, {
         };
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup(`<h3>${feature.properties.NAME}</h3>`)
+        layer.bindPopup(`<h3>${feature.properties.NAME}</h3>`
+        <p>${point.properties.INFO}</p>
+        );
     }
 }).addTo(heritageGroup);
