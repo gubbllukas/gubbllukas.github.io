@@ -55,12 +55,18 @@ let aws = L.geoJson.ajax(awsUrl, {
 
 let drawTemperature = function(jsonData) {
     console.log("asu der Funktion", jsonData);
-    L.geoJson(jsonData).addTo(overlay.temperature);
+    L.geoJson(jsonData, {
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {
+                title: `${feature.properties.name} (${feature.geometry.coordinates[2]}m)`
+            })
+        }
+    }).addTo(overlay.temperature);
 };
 
 aws.on("data:loaded", function() {
     // console.log(aws.toGeoJSON())
     drawTemperature(aws.toGeoJSON());
     map.fitBounds(overlay.stations.getBounds());
-    overlay.stations.addTo(map);
+    overlay.temperature.addTo(map);
 });
