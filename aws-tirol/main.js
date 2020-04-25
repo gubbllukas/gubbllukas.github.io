@@ -158,6 +158,19 @@ let drawHumidity = function (jsonData) {
     }).addTo(overlay.humidity);
 };
 
+L.control.rainviewer({ 
+    position: 'bottomleft',
+    nextButtonText: '>',
+    playStopButtonText: 'Play/Stop',
+    prevButtonText: '<',
+    positionSliderLabelText: "Hour:",
+    opacitySliderLabelText: "Opacity:",
+    animationInterval: 500,
+    opacity: 0.5
+}).addTo(map);
+
+
+
 aws.on("data:loaded", function () {
     // console.log(aws.toGeoJSON())
     drawTemperature(aws.toGeoJSON());
