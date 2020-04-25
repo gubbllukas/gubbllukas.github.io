@@ -1,6 +1,8 @@
 let startLayer = L.tileLayer.provider("BasemapAT.grau");
 
 let map = L.map("map", {
+    center: [47.3, 11.5],
+    zoom: 8,
     layers: [
         startLayer
     ]
@@ -11,7 +13,8 @@ let overlay = {
     stations: L.featureGroup(),
     temperature: L.featureGroup(),
     wind: L.featureGroup(),
-    snow: L.featureGroup()
+    snow: L.featureGroup(),
+    humidity: L.featureGroup()
 }
 
 L.control.layers({
@@ -31,6 +34,7 @@ L.control.layers({
     "Temperatur (°C)": overlay.temperature,
     "Windgeschwindigkeit (km/h)": overlay.wind,
     "Schneehöhe (cm)": overlay.snow,
+    "rel. Luftfeuchte (%)": overlay.humidity
 }).addTo(map);
 
 let awsUrl = "https://aws.openweb.cc/stations";
@@ -135,12 +139,31 @@ let drawSnow = function (jsonData) {
     }).addTo(overlay.snow);
 };
 
+let drawHumidity = function (jsonData) {
+
+    L.geoJson(jsonData, {
+        filter: function (feature) {
+            return feature.properties.RH
+        },
+        pointToLayer: function (feature, latlng) {
+            let color = getColor(feature.properties.RH, COLORS.humidity);
+            return L.marker(latlng, {
+                title: `${feature.properties.name} (${feature.geometry.coordinates[2]}m)`,
+                icon: L.divIcon({
+                    html: `<div class="label-humidity" style="background-color:${color}"> ${feature.properties.RH}</div>`,
+                    className: "ignore-me"
+                })
+            })
+        }
+    }).addTo(overlay.humidity);
+};
 
 aws.on("data:loaded", function () {
     // console.log(aws.toGeoJSON())
     drawTemperature(aws.toGeoJSON());
     drawWind(aws.toGeoJSON());
     drawSnow(aws.toGeoJSON());
+    drawHumidity(aws.toGeoJSON());
     map.fitBounds(overlay.stations.getBounds());
 
     overlay.temperature.addTo(map);
