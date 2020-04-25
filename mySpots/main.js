@@ -55,6 +55,12 @@ markerBiwakBirkental.bindPopup("<b>BiwakBirkental</b><br>Biwak,Baden,Wasser,Lage
 let markerBadeseeLechtal = L.marker([47.433658, 10.608814]).addTo(mymap);
 markerBadeseeLechtal.bindPopup("<b>Badesee Lechtal</b><br>Baden").openPopup();
 
+let markerBiwakMandelspitze = L.marker([47.317876, 11.406019]).addTo(mymap);
+markerBiwakMandelspitze.bindPopup("<b>Biwak Mandlspitze</b><br>Biwak").openPopup();
+
+
+
+let popup = L.popup();
 function onMapClick(e) {
     popup
         .setLatLng(e.latlng)
