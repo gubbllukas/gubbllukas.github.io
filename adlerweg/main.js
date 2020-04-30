@@ -53,6 +53,8 @@ for (const blick of ADLERBLICKE) {
 overlay.adlerblicke.addTo(map);
 
 let drawEtappe = function(nr) {
+    overlay.etappen.clearLayers();
+    
     //console.log(ETAPPEN[nr].track);
     //--> Umbau des Track-Elements so, dass das A nicht mehr darin steht
     let track = ETAPPEN[nr].track.replace("A", "");
@@ -85,7 +87,7 @@ let pulldown = document.querySelector("#pulldown");
 
 for (let i = 1; i < ETAPPEN.length; i++) {
     const etappe = ETAPPEN[i];
-    console.log(etappe);
+    //console.log(etappe);
     pulldown.innerHTML += `<option value="${i}">${etappe.titel}</option>`;
 }
 pulldown.onchange = function(evt) {
