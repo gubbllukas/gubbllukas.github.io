@@ -9,7 +9,8 @@ let map = L.map("map", {
 });
 
 let overlay = {
-    adlerblicke: L.featureGroup()
+    adlerblicke: L.featureGroup(),
+    etappen: L.featureGroup()
 };
 
 L.control.layers({
@@ -25,7 +26,8 @@ L.control.layers({
         L.tileLayer.provider("BasemapAT.overlay")
     ])
 }, {
-    "Adlerblicke": overlay.adlerblicke
+    "Adlerblicke": overlay.adlerblicke,
+    "Adlerweg Etappen": overlay.etappen
 }).addTo(map);
 
 //Test ob Einbindung funktioniert:
@@ -48,9 +50,6 @@ for (const blick of ADLERBLICKE) {
     mrk.bindPopup(`Standort ${blick.standort} (${blick.seehoehe}m)`)
 }
 
-overlay.adlerblicke.addTo(map);
-
-
 let gpx = new L.GPX("gpx/AdlerwegEtappe01.gpx", {
     async: true,
     marker_options: {
@@ -62,12 +61,14 @@ let gpx = new L.GPX("gpx/AdlerwegEtappe01.gpx", {
         popupAnchor: [0, -37]
     },
     polyline_options: {
-        dashArray: [10, 5],
+        dashArray: [2, 5],
         color: "black",
         weight: 2
       }
-});
+}).addTo(overlay.etappen);
 
 gpx.on("loaded", function(evt) {
     map.fitBounds(evt.target.getBounds());
 }).addTo(map);
+overlay.adlerblicke.addTo(map);
+overlay.etappen.addTo(map);
