@@ -8,6 +8,9 @@ let map = L.map("map", {
     ]
 });
 
+
+
+
 L.control.layers({
     "BasemapAT.grau": L.tileLayer.provider("BasemapAT.grau"),
     "BasemapAT": L.tileLayer.provider("BasemapAT"),
@@ -21,4 +24,14 @@ L.control.layers({
         L.tileLayer.provider("BasemapAT.overlay")
     ])
 }).addTo(map);
+
+//Test ob Einbindung funktioniert:
+//console.log(ETAPPEN);
+//console.log(ADLERBLICKE);
+
+for (const blick of ADLERBLICKE) {
+    console.log(blick);
+    let mrk = L.marker([blick.lat,blick.lng]).addTo(map);
+    mrk.bindPopup(`Standort ${blick.standort} (${blick.seehoehe}m)`)
+}
 
