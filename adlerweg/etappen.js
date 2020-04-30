@@ -1,4 +1,4 @@
-[
+const ETAPPEN = [
     {
       "nr": "Etappennummer",
       "titel": "Titel",
@@ -543,4 +543,4 @@
       "Einkehrmöglichkeiten": "Glorer Hütte#Luchknerhaus",
       "track": "O9"
     }
-   ]
+   ];
