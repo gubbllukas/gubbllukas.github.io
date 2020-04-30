@@ -54,9 +54,17 @@ overlay.adlerblicke.addTo(map);
 let gpx = new L.GPX("gpx/AdlerwegEtappe01.gpx", {
     async: true,
     marker_options: {
-        startIconUrl: 'images/finish.png',
-        endIconUrl: 'images/pin-icon-end.png',
-        shadowUrl: 'images/pin-shadow.png'
+        startIconUrl: 'icons/number_1.png',
+        endIconUrl: 'icons/finish.png',
+        shadowUrl: null,
+        iconSize: [32, 37],
+        iconAnchor: [16, 37],
+        popupAnchor: [0, -37]
+    },
+    polyline_options: {
+        dashArray: [10, 5],
+        color: "black",
+        weight: 2
       }
 });
 
