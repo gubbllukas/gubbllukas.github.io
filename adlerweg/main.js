@@ -83,10 +83,17 @@ let drawEtappe = function (nr) {
     overlay.etappen.addTo(map);
 
     for (const key in ETAPPEN[nr]) {
-        const val = ETAPPEN[nr][key];
-        //console.log(`et-${key}`);
+        //const in let abgeändert, damit unten einzeln abrufbar
+        let val = ETAPPEN[nr][key];
+        // console.log(`et-${key}`);
         let elem = document.querySelector(`#et-${key}`);
+        // if-Element eingefügt
+        // wenn der key "einkehr" abgerufen wird alle "# durch ", " ersetzen
+        // Schreibweise /#/g --> https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string
         if (elem) {
+            if (key == "einkehr") {
+                val = val.replace(/#/g, ", ");
+            }
             elem.innerHTML = val;
             //console.log(val);
         }
