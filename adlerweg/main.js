@@ -60,6 +60,15 @@ let drawEtappe = function (nr) {
     let track = ETAPPEN[nr].track.replace("A", "");
     //console.log(track);
 
+    //Problem: Start-Icon wird nicht angezeigt, ab track="O1"
+    //Neue Variable iconNumber mit 25 aufsteigend erstellen
+    //parseInt: Umwandlung von String in Integer für mathematische Rechnung
+    //bei StartIconUrl ${track} durch ${iconNumer} ersetzen
+    let iconNumber = track;
+    if (track.startsWith("O")) {
+        iconNumber = parseInt(track.replace("O", "")) + 24;
+    }
+
     let gpx = new L.GPX(`gpx/AdlerwegEtappe${track}.gpx`, {
         async: true,
         marker_options: {
