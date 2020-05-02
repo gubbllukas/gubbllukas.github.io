@@ -115,8 +115,6 @@ let drawEtappe = function (nr) {
     const href = `/adlerweg/gpx/AdlerwegEtappe${track}.gpx`
     let link = document.querySelector("#gpxlink");
     link.href = href;
-
-
 };
 
 let pulldown = document.querySelector("#pulldown");
