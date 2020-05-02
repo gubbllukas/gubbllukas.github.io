@@ -63,7 +63,7 @@ let drawEtappe = function (nr) {
     let gpx = new L.GPX(`gpx/AdlerwegEtappe${track}.gpx`, {
         async: true,
         marker_options: {
-            startIconUrl: `icons/number_${track}.png`,
+            startIconUrl: `icons/number_${iconNumber}.png`,
             endIconUrl: 'icons/finish.png',
             shadowUrl: null,
             iconSize: [32, 37],
@@ -98,6 +98,16 @@ let drawEtappe = function (nr) {
             //console.log(val);
         }
     }
+
+    // Link-gpxfile:
+    // 1. Konstante mit enstsprechendem GPX-File-Namen erzeugen
+    // 2. Zugriff auf html Dokument
+    // 3. Verlinkung von href aus JS mit href im html
+    const href = `/adlerweg/gpx/AdlerwegEtappe${track}.gpx`
+    let link = document.querySelector("#gpxlink");
+    link.href = href;
+
+
 };
 
 let pulldown = document.querySelector("#pulldown");
